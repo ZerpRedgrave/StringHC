@@ -6,7 +6,7 @@
   Date Created: 2025-06-20
   Date Revised: 2025-07-03
   Author Name: Zeke S. Redgrave
-  Description: Adding Missing String Features from Latest Version of C
+  Description: Adding String Features for Holy C
   
   God Bless to you all including Mr.Terry, TempleOS, HolyC and JC 
 ---------------------------------------------------------------------------------------------------------
