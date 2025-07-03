@@ -40,8 +40,6 @@ I64 StrDLen(U8 *str, U8 *f){
 
 I64 *StrIAToken(U8 *str, U8 *f){
         //Get All StrIndexAt And Return Token with Int Contain
-        
-        //Check and Get All Delimiter(Str) Length inside of Str
         I64 a=0,b,i=0,c=0,_f=StrLen(f), *t=MAlloc(StrDLen(str,f)*sizeof(I64));
         U8 *s=MAlloc(_f*sizeof(U8));
         
@@ -157,8 +155,6 @@ U64 *StrIns(U8 *str,U8 *part,I64 i){
 
 U8 *StrRep(U8 *str, U8 *old, U8 *new){
         //Replace Single Identical Char Only then Overwrite the Str
-        
-        //Looking for a old Char
         I64 i=StrIndexAt(str,old),a,b;
         U8 *t="";
         
@@ -188,25 +184,18 @@ U8 *StrRepAll(U8 *str, U8 *old, U8 *new){
 	while(a<l){
 		while(b<t[a]){
 		        ts=MStrPrint("%s%c",ts,str[b]);
-			//ts[c]=str[b];
-			//c++;
 			b++;
 
 		}
-		/*while(d<StrLen(new)){
-			ts[c]=new[d];
-			c++;
-		}*/
 		ts=MStrPrint("%s%s",ts,new);
 
-		b=AbsI64(StrLen(old)+b);
+		b=AbsI64(StrLen(old)+b);
 		
 		a++;
 	}
 	
 	while(b<StrLen(str)){
 		ts=MStrPrint("%s%c",ts,str[b]);
-		//ts[c]=str[b];
 		b++;
 	}
 
