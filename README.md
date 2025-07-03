@@ -13,4 +13,4 @@ A Sinple Modern HolyC Library Features for HolyC Library thats intended to use f
 - StrRepAll() -> Replace Single Identical Char Only then Return Token with Str Contain
 
 # Contribution and Request
-You can contribute and Request anytime as long i have a spare time to work on. Additionally, If you have a problem regardling about the Library please report it immediately.
+You can Contribute if you have a spare time and Request anytime as long i have a spare time to work on. Additionally, If you have a problem regardling about the Library please report it immediately.
