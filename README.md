@@ -1,5 +1,5 @@
 # StringHC
-Modern HolyC Library Features for HolyC Library
+A Sinple Modern HolyC Library Features for HolyC Library thats intended to use from Amateur to Professional
 
 # List Features in String
 - StrCat() -> Connecting *s to *d then return *s
@@ -11,3 +11,6 @@ Modern HolyC Library Features for HolyC Library
 - StrIns() -> Inserting Char in Specific Index inside in Str
 - StrRep() -> Replace Single Identical Char Only then Return Str
 - StrRepAll() -> Replace Single Identical Char Only then Return Token with Str Contain
+
+# Contribution and Request
+You can contribute and Request anytime as long i have a spare time to work on. Additionally, If you have a problem regardling about the Library please report it immediately.
