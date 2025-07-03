@@ -1,5 +1,9 @@
 # StringHC
-A Sinple Modern HolyC Library Features for HolyC Library thats intended to use from Amateur to Professional
+A Sinple Modern HolyC Library Features for HolyC Library thats intended to use from Amateur to Professional.
+The Question is How to use it? Simple!.
+
+- #include "Path+StrA.HC" Ex. #include "/MyProject/StrA.HC"
+- And its time to work
 
 # List Features in String
 - StrCat() -> Connecting *s to *d then return *s
@@ -14,3 +18,5 @@ A Sinple Modern HolyC Library Features for HolyC Library thats intended to use f
 
 # Contribution and Request
 You can Contribute if you have a spare time and Request anytime as long i have a spare time to work on. Additionally, If you have a problem regardling about the Library please report it immediately.
+Please be careful. HolyC in TempleOS is not stable yet and it can crashed the OS into a kernel panic, freeze or crashed completely. It is not my fault nor Mr. Terry itself.
+Sometimes its kinda buggy to execut if you don't know how to use it so be careful. 
