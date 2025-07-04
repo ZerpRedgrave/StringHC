@@ -20,13 +20,15 @@ U8 *StrCat(U8 *d, U8 *s){
 I64 StrDLen(U8 *str, U8 *f){
         //Check and Get All Delimiter(Str) Count inside of Str
         I64 a=0,b,i=0,c=0,_f=StrLen(f);
-        U8 *s=MAlloc(_f*sizeof(U8));
+        U8 *s=MAlloc(_f+1*sizeof(U8)); //Patch Fixed!
         
         while(a<StrLen(str)){
                 if(a<_f) {
                         s[i]=str[a];
                         i++;
                 }
+		s[_f]='\0'; //Adding Null Terminate & Patch Fixed!
+
                 if(StrCmp(s,f)==FALSE) c++;
 
                 for(b=0;b<_f;b++) s[b]=s[b+1];
