@@ -1,12 +1,12 @@
 /*
 ---------------------------------------------------------------------------------------------------------
           DC       DR        RC        DC->Date Created, DR->Date Revised, RC->Revised Count
-  Version 20250620-r20250625.3
+  Version 20250620-r20250625.4
 ---------------------------------------------------------------------------------------------------------
   Date Created: 2025-06-20
-  Date Revised: 2025-07-03
+  Date Revised: 2025-07-04
   Author Name: Zeke S. Redgrave
-  Description: Adding String Features for Holy C
+  Description: Adding Missing String Features from Latest Version of C
   
   God Bless to you all including Mr.Terry, TempleOS, HolyC and JC 
 ---------------------------------------------------------------------------------------------------------
@@ -27,9 +27,9 @@ I64 StrDLen(U8 *str, U8 *f){
                         s[i]=str[a];
                         i++;
                 }
-		s[_f]='\0'; //Adding Null Terminate & Patch Fixed!
-
-                if(StrCmp(s,f)==FALSE) c++;
+                s[_f]='\0'; //Patch Fixed!
+                
+                if(StrCmp(s,f)==FALSE) c++; 
 
                 for(b=0;b<_f;b++) s[b]=s[b+1];
                 s[i-1]=str[a];
@@ -43,7 +43,7 @@ I64 StrDLen(U8 *str, U8 *f){
 I64 *StrIAToken(U8 *str, U8 *f){
         //Get All StrIndexAt And Return Token with Int Contain
         I64 a=0,b,i=0,c=0,_f=StrLen(f), *t=MAlloc(StrDLen(str,f)*sizeof(I64));
-        U8 *s=MAlloc(_f*sizeof(U8));
+        U8 *s=MAlloc(_f+1*sizeof(U8)); //Patch Fixed!
         
         while(a<StrLen(str)){
                 if(a<_f) {
@@ -55,6 +55,8 @@ I64 *StrIAToken(U8 *str, U8 *f){
                         c++;
                 }
 
+                s[_f]='\0'; //Patch Fixed!
+                
                 for(b=0;b<_f;b++) s[b]=s[b+1];
                 s[i-1]=str[a];
                                         
@@ -99,21 +101,23 @@ U64 *StrSplit(U8 *str, U8 *ch){
 
 I64 StrIndexAt(U8 *str, U8 *f){ 
         //Inserting String and Return Index in given Words
-        I64 a=0,b,i=0;
-        U8 *s=MAlloc(StrLen(f)*sizeof(U8));
+        I64 a=0,b,i=0,_f=StrLen(f),_i=-1;
+        U8 *s=MAlloc(_f+1*sizeof(U8));//Patch Fixed!
         
-        if(StrLen(f)!=0) {
+        if(_f!=0) {
                 while(a<StrLen(str)){
 	                if(a<StrLen(f)) {
 		                s[i]=str[a];
 		                i++;
 	                }
 	                if(StrCmp(s,f)==FALSE) {
-	                        Free(s);
-	                        return AbsI64(StrLen(f)-a); 
+	                        _i=AbsI64(StrLen(f)-a);
+	                        break;
 	                }
 	                
-	                for(b=0;b<StrLen(f);b++) s[b]=s[b+1];
+	                s[_f]='\0';//Patch Fixed!
+	                
+	                for(b=0;b<_f;b++) s[b]=s[b+1];
 	                s[i-1]=str[a];
                         
 	                a++;
@@ -121,7 +125,7 @@ I64 StrIndexAt(U8 *str, U8 *f){
         }
         
         Free(s);
-        return -1;
+        return _i;
 }
 
 U8 *StrIndex(U8 *str, I64 i){
@@ -157,8 +161,10 @@ U64 *StrIns(U8 *str,U8 *part,I64 i){
 
 U8 *StrRep(U8 *str, U8 *old, U8 *new){
         //Replace Single Identical Char Only then Overwrite the Str
-        I64 i=StrIndexAt(str,old),a,b;
-        U8 *t="";
+        
+        //Looking for a old Char
+        I64 i=StrIndexAt(str,old),a,b,c=AbsI64(StrLen(str)-(StrLen(old)-StrLen(new)))+1;
+        U8 *t=MAlloc(c+1*sizeof(U8));
         
         if(i!=-1) {
 	        for(a=0;a<i;a++) t[a]=str[a];
@@ -170,8 +176,8 @@ U8 *StrRep(U8 *str, U8 *old, U8 *new){
 	                t[a]=str[i];
 	                a++;
 	        }
-	        str=t;
-	        t=NULL;
+	        StrCpy(str,t);
+	        Free(t);
         }
         return str;
 }
@@ -180,24 +186,28 @@ U8 *StrRepAll(U8 *str, U8 *old, U8 *new){
         //Replace Multiple Identical Char then Overwrite the Str
 	I64 l=StrDLen(str,old);
 	I64 *t=StrIAToken(str,old);
-	I64 a=0,b=0;
-	U8 *ts="";
+	I64 a=0,b=0,c=0,d,e=AbsI64(StrLen(str)-(StrLen(old)-StrLen(new)))+1;
+	U8 *ts=MAlloc(d*sizeof(U8));
 	
 	while(a<l){
 		while(b<t[a]){
-		        ts=MStrPrint("%s%c",ts,str[b]);
+			ts[c]=str[b];
+			c++;
 			b++;
 
 		}
-		ts=MStrPrint("%s%s",ts,new);
-
+		for(d=0;d<StrLen(new);d++){
+			ts[c]=new[d];
+			c++;
+		}
 		b=AbsI64(StrLen(old)+b);
-		
+	        
 		a++;
 	}
 	
 	while(b<StrLen(str)){
-		ts=MStrPrint("%s%c",ts,str[b]);
+		ts[c]=str[b];
+		c++;
 		b++;
 	}
 
@@ -206,4 +216,3 @@ U8 *StrRepAll(U8 *str, U8 *old, U8 *new){
 
 	return str;
 }
-
